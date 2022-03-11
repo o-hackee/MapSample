@@ -6,9 +6,16 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+enum class LocationStatus {
+    Undefined,
+    NoLocationAccessGranted,
+    LocationAccessGranted, // poor option, let it be for now
+    LocationTurnedOff,
+    LocationTurnedOn
+}
+
 data class MapUiState(
-    val locationAccessGranted: Boolean? = null,
-    val locationTurnedOn: Boolean = false
+    val locationStatus: LocationStatus = LocationStatus.Undefined
 )
 
 class MapViewModel: ViewModel() {
@@ -16,9 +23,9 @@ class MapViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(MapUiState())
     val uiState: StateFlow<MapUiState> = _uiState.asStateFlow()
 
-    fun locationPermissionResult(granted: Boolean) {
+    fun updateLocationStatus(locationStatus: LocationStatus) {
         _uiState.update {
-            it.copy(locationAccessGranted = granted)
+            it.copy(locationStatus = locationStatus)
         }
     }
 }
