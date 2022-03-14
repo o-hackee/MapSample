@@ -6,13 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <org.osmdroid.views.MapView
-        android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/constraint_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/black"/>
+
+    <View
+        android:id="@+id/viewLeft"
+        android:layout_width="@dimen/constraint_size"
+        android:layout_height="match_parent"
+        android:background="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/viewTop"
+        app:layout_constraintStart_toEndOf="@+id/viewLeft"
+        app:layout_constraintEnd_toStartOf="@id/viewRight"
+        app:layout_constraintBottom_toTopOf="@id/viewBottom"/>
+
+    <View
+        android:id="@+id/viewRight"
+        android:layout_width="@dimen/constraint_size"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black"/>
+
+    <View
+        android:id="@+id/viewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/constraint_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
