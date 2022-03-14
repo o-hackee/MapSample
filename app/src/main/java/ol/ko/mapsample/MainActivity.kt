@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         private const val noLocationAccessClickableIconId = 42
         private const val locationTurnedOffClickableIconId = 43
 
+        const val startingZoomLevel = 19.0
         val startingCenterPoint = GeoPoint(48.1510, 16.3342)
     }
 
@@ -184,9 +185,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMap() {
-        mapView.controller.setZoom(19.0)
-        mapView.controller.setCenter(startingCenterPoint)
-
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mapView)
         val scaleBarOverlay = ScaleBarOverlay(mapView)
         val copyrightOverlay = CopyrightOverlay(this)
@@ -195,6 +193,9 @@ class MainActivity : AppCompatActivity() {
             scaleBarOverlay, copyrightOverlay))
 
         mapView.setMultiTouchControls(true)
+
+        mapView.controller.setZoom(startingZoomLevel)
+        mapView.controller.setCenter(startingCenterPoint)
     }
 
     private fun handleLocationAccessIcon(granted: Boolean) {
@@ -226,6 +227,6 @@ class MainActivity : AppCompatActivity() {
                 mapView.overlays.removeAt(foundIdx)
             }
         }
-        mapView.invalidate() // TODO
+        mapView.invalidate()
     }
 }
